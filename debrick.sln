@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "debrick", "debrick\debrick.csproj", "{54E1DBB6-89CE-4647-92D8-D9C46067E1FC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{54E1DBB6-89CE-4647-92D8-D9C46067E1FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54E1DBB6-89CE-4647-92D8-D9C46067E1FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54E1DBB6-89CE-4647-92D8-D9C46067E1FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54E1DBB6-89CE-4647-92D8-D9C46067E1FC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D10FD10A-C1FC-4325-965C-94C47B065215}
+	EndGlobalSection
+EndGlobal
