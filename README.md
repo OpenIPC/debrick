@@ -6,6 +6,8 @@ Open-source software for Windows, which allows you to flash the camera (on Goke 
 
 Originally сreated to simplify (automate) the flashing of cameras, but can also be used to read dump flash, restore bricked/passworded cameras and writing [OpenIPC](https://openipc.org/) binary files (similar [burn](https://github.com/OpenIPC/burn)).
 
+You can download it [here](https://github.com/OpenIPC/debrick/releases/tag/v1.0.0)
+
 ### How to use 
 
 ![](connection.jpg)
