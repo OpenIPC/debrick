@@ -12,9 +12,7 @@ You can download debrick tool [here](https://github.com/OpenIPC/debrick/releases
 
 ![](connection.jpg)
 
-Run the program, follow the [video](https://www.youtube.com/watch?v=WQcVlOOUAro&t=111s) instructions from the [telkam](https://t.me/telkamInfo) project:
-
-![](form.jpg)
+Run the program, follow the [video](https://www.youtube.com/watch?v=WQcVlOOUAro&t=111s) instructions from the [telkam](https://t.me/telkamInfo) project.
 
 ### Notes 
 
