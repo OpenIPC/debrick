@@ -49,7 +49,7 @@
             labelVersion.Name = "labelVersion";
             labelVersion.Size = new Size(73, 32);
             labelVersion.TabIndex = 2;
-            labelVersion.Text = "v.2.0";
+            labelVersion.Text = "v.2.1";
             // 
             // label
             // 
@@ -159,7 +159,7 @@
             linkLabel.Size = new Size(291, 32);
             linkLabel.TabIndex = 10;
             linkLabel.TabStop = true;
-            linkLabel.Text = "https://t.me/telkamInfo";
+            linkLabel.Text = "https://github.com/OpenIPC/debrick";
             linkLabel.LinkClicked += LinkLabel_LinkClicked;
             // 
             // Form
