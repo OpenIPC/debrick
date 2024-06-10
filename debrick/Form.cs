@@ -9,7 +9,7 @@ namespace debrick
 {
     public partial class Form : System.Windows.Forms.Form
     {
-        readonly ushort[] crctable = {
+        readonly ushort[] crctable = [
             0x0000, 0x1021, 0x2042, 0x3063, 0x4084, 0x50a5, 0x60c6, 0x70e7,
             0x8108, 0x9129, 0xa14a, 0xb16b, 0xc18c, 0xd1ad, 0xe1ce, 0xf1ef,
             0x1231, 0x0210, 0x3273, 0x2252, 0x52b5, 0x4294, 0x72f7, 0x62d6,
@@ -42,8 +42,8 @@ namespace debrick
             0x7c26, 0x6c07, 0x5c64, 0x4c45, 0x3ca2, 0x2c83, 0x1ce0, 0x0cc1,
             0xef1f, 0xff3e, 0xcf5d, 0xdf7c, 0xaf9b, 0xbfba, 0x8fd9, 0x9ff8,
             0x6e17, 0x7e36, 0x4e55, 0x5e74, 0x2e93, 0x3eb2, 0x0ed1, 0x1ef0,
-        };
-        readonly byte[] ddrstep = {
+        ];
+        readonly byte[] ddrstep = [
             0x04,0xe0,0x2d,0xe5,0x24,0x00,0x9f,0xe5,
             0x24,0x10,0x9f,0xe5,0x00,0x10,0x80,0xe5,
             0x20,0x00,0x9f,0xe5,0x20,0x10,0x9f,0xe5,
@@ -52,7 +52,7 @@ namespace debrick
             0xef,0xbe,0xad,0xde,0xef,0xbe,0xad,0xde,
             0x3c,0x01,0x02,0x12,0x78,0x56,0x34,0x12,
             0x40,0x01,0x02,0x12,0x75,0x6a,0x69,0x7a
-        };
+        ];
 
         enum OPCODE : byte
         {
@@ -73,7 +73,7 @@ namespace debrick
             public byte[] data;
         }
 
-        readonly List<FLASH_FILE> files = new();
+        readonly List<FLASH_FILE> files = [];
         byte[] tBuf = new byte[1];
         int tBuf_len = 0;
         const int TFTP_PAYLOAD_SIZE = 1468;
@@ -102,7 +102,7 @@ namespace debrick
             InitializeComponent();
             dirApp = Path.GetDirectoryName(Application.ExecutablePath) ?? "";
             button0.Text = "Yes";
-            button0.Left = 300;
+            button0.Left = this.Width / 2 - button0.Width / 2;
             button0.Visible = true;
             Refresh();
         }
@@ -281,11 +281,11 @@ namespace debrick
             checkedListBox.Visible = false;
             progressBar.Visible = false;
             button2.Text = "Dump";
-            button2.Left = 100;
+            button2.Left = this.Width / 2 - (button0.Width + button1.Width + button2.Width) / 2;
             button1.Text = "Burn bin";
-            button1.Left = 300;
+            button1.Left = button2.Left + button2.Width;
             button0.Text = "Burn img";
-            button0.Left = 500;
+            button0.Left = button1.Left + button1.Width;
             button0.Enabled = true;
             button2.Visible = true;
             button1.Visible = true;
@@ -301,10 +301,10 @@ namespace debrick
             label.Text = "Select COM Port:";
             button2.Visible = false;
             button1.Text = "Refresh";
-            button1.Left = 200;
+            button1.Left = this.Width / 2 - button1.Width;
             button1.Visible = true;
             button0.Text = "Listen";
-            button0.Left = 400;
+            button0.Left = button1.Left + button1.Width;
             button0.Visible = true;
             Refresh();
         }
@@ -319,7 +319,7 @@ namespace debrick
             checkedListBox.Visible = true;
             label.Text = "Select SoC:";
             button0.Text = "OK";
-            button0.Left = 300;
+            button0.Left = this.Width / 2 - button0.Width / 2; ;
             button0.Enabled = true;
             button0.Visible = true;
             Refresh();
@@ -416,7 +416,7 @@ namespace debrick
                 {
                     if (label.Text.Contains("SoC"))
                     {
-                        string? soc = checkedListBox.CheckedItems[0].ToString();
+                        string? soc = checkedListBox.CheckedItems[0]?.ToString();
                         if (soc == null || soc.Contains("v2"))
                         {
                             ubootFile = Properties.Resources.gk7205v2;
@@ -434,10 +434,10 @@ namespace debrick
                 if (ubootFile == null) return;
                 button1.Visible = false;
                 checkedListBox.Visible = false;
-                label.Text = "Listening on a port " + checkedListBox.CheckedItems[0].ToString();
+                label.Text = "Listening on a port " + checkedListBox.CheckedItems[0]?.ToString();
                 label.Text += "\nTurn off->on the camera power";
                 button0.Text = "Cancel";
-                button0.Left = 300;
+                button0.Left = this.Width / 2 - button0.Width / 2; ;
                 progressBar.Value = 0;
                 progressBar.Maximum = SP_BOOT_SPL_LEN / SP_MAX_DATA_LEN + (ubootFile.Length + SP_MAX_DATA_LEN + 1) / SP_MAX_DATA_LEN + 1;
                 progressBar.Style = ProgressBarStyle.Marquee;
@@ -445,7 +445,7 @@ namespace debrick
                 Refresh();
                 try
                 {
-                    serialPort = new SerialPort(checkedListBox.CheckedItems[0].ToString(), 115200, Parity.None, 8, StopBits.One);
+                    serialPort = new SerialPort(checkedListBox.CheckedItems[0]?.ToString(), 115200, Parity.None, 8, StopBits.One);
                     serialPort.Open();
                     run = true;
                     threadBootLoad = new Thread(ThreadBootLoad);
@@ -469,13 +469,13 @@ namespace debrick
                 RefreshFilesList();
                 checkedListBox.Visible = true;
                 button2.Text = "Cancel";
-                button2.Left = 100;
+                button2.Left = this.Width / 2 - (button0.Width + button1.Width + button2.Width) / 2; ;
                 button2.Visible = true;
                 button1.Text = "Refresh";
-                button1.Left = 300;
+                button1.Left = button2.Left + button2.Width;
                 button1.Visible = true;
                 button0.Text = "Burn";
-                button0.Left = 500;
+                button0.Left = button1.Left + button1.Width;
                 button0.Enabled = false;
                 button0.Visible = true;
                 Refresh();
@@ -483,7 +483,7 @@ namespace debrick
             else if (btn.Text == "Burn")
             {
                 files.Clear();
-                List<string> checkedItems = new();
+                List<string> checkedItems = [];
                 foreach (var item in checkedListBox.CheckedItems)
                 {
                     string? filename = item.ToString();
@@ -575,7 +575,7 @@ namespace debrick
                     if (i != e.Index) checkedListBox.SetItemChecked(i, false);
                 }
             }
-            List<string> checkedItems = new();
+            List<string> checkedItems = [];
             string? str;
             foreach (var item in checkedListBox.CheckedItems)
             {
@@ -704,7 +704,7 @@ namespace debrick
             label.Text = txt;
             progressBar.Visible = false;
             button0.Text = "OK";
-            button0.Left = 300;
+            button0.Left = this.Width / 2 - button0.Width / 2; ;
             button0.Visible = true;
             Refresh();
 
@@ -755,7 +755,7 @@ namespace debrick
                         {
                             if (line.Contains("Erasing") || line.Contains("Writing"))
                             {
-                                int progress = int.Parse(line.Substring(line.IndexOf("%") - 3, 3)); ;
+                                int progress = int.Parse(line.Substring(line.IndexOf('%') - 3, 3)); ;
                                 if (line.StartsWith("Writing")) progress += 100;
                                 try
                                 {
@@ -827,49 +827,68 @@ namespace debrick
                         files.Clear();
                         cmd = "\x03";
                     }
-                    else 
+                    else
                     {
                         Thread.Sleep(1000);
                         FLASH_FILE ff;
                         switch (stage)
                         {
                             case 1:
-                                ff.name = "";
-                                ff.loadA = 0;
-                                ff.sizeE = flashSize;
-                                ff.data = new byte[tBuf_len];
-                                Array.Copy(tBuf, ff.data, tBuf_len);
-                                files.Add(ff);
-                                FileGet();
-                                try
+                                if (tBuf_len == flashSize)
                                 {
-                                    Invoke(SetStage, 2);
-                                }
-                                catch { return; }
-                                break;
-                            case 2:
-                                ff.name = "";
-                                ff.loadA = 0;
-                                ff.sizeE = flashSize;
-                                ff.data = new byte[tBuf_len];
-                                Array.Copy(tBuf, ff.data, tBuf_len);
-                                files.Add(ff);
-                                bool success = VerifyFiles();
-                                if (success)
-                                {
-                                    string filename = "dump_" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".bin";
-                                    File.WriteAllBytes(filename, files[0].data);
+                                    ff.name = "";
+                                    ff.loadA = 0;
+                                    ff.sizeE = tBuf_len;
+                                    ff.data = new byte[tBuf_len];
+                                    Array.Copy(tBuf, ff.data, tBuf_len);
+                                    files.Add(ff);
+                                    FileGet();
                                     try
                                     {
-                                        Invoke(ShowFinish, "Dump. Success!\nSaved file:\n" + filename);
+                                        Invoke(SetStage, 2);
                                     }
                                     catch { return; }
                                 }
-                                else
-                                {
+                                else {
                                     try
                                     {
-                                        Invoke(ShowFinish, "Dump. Fail!\nVerification error\nTry again");
+                                        Invoke(ShowFinish, "Dump. Fail!\nSomething went wrong\nTry again");
+                                    }
+                                    catch { return; }
+                                }
+                                break;
+                            case 2:
+                                if (tBuf_len == flashSize)
+                                {
+                                    ff.name = "";
+                                    ff.loadA = 0;
+                                    ff.sizeE = tBuf_len;
+                                    ff.data = new byte[tBuf_len];
+                                    Array.Copy(tBuf, ff.data, tBuf_len);
+                                    files.Add(ff);
+                                    if (VerifyFiles() == true)
+                                    {
+                                        string filename = "dump_" + DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".bin";
+                                        File.WriteAllBytes(filename, files[0].data);
+                                        try
+                                        {
+                                            Invoke(ShowFinish, "Dump. Success!\nSaved file:\n" + filename);
+                                        }
+                                        catch { return; }
+                                    }
+                                    else
+                                    {
+                                        try
+                                        {
+                                            Invoke(ShowFinish, "Dump. Fail!\nVerification error\nTry again");
+                                        }
+                                        catch { return; }
+                                    }
+                                }
+                                else {
+                                    try
+                                    {
+                                        Invoke(ShowFinish, "Dump. Fail!\nSomething went wrong\nTry again");
                                     }
                                     catch { return; }
                                 }
@@ -906,25 +925,36 @@ namespace debrick
                                 }
                                 break;
                             case 5:
-                                ff.name = "";
-                                ff.loadA = 0;
-                                ff.sizeE = flashSize;
-                                ff.data = new byte[tBuf_len];
-                                Array.Copy(tBuf, ff.data, tBuf_len);
-                                files.Add(ff);
-                                if (VerifyFiles() == true)
+                                if (tBuf_len == flashSize)
                                 {
-                                    try
+                                    ff.name = "";
+                                    ff.loadA = 0;
+                                    ff.sizeE = tBuf_len;
+                                    ff.data = new byte[tBuf_len];
+                                    Array.Copy(tBuf, ff.data, tBuf_len);
+                                    files.Add(ff);
+                                    if (VerifyFiles() == true)
                                     {
-                                        Invoke(ShowFinish, "Burn. Success!");
+                                        try
+                                        {
+                                            Invoke(ShowFinish, "Burn. Success!");
+                                        }
+                                        catch { return; }
                                     }
-                                    catch { return; }
+                                    else
+                                    {
+                                        try
+                                        {
+                                            Invoke(ShowFinish, "Burn. Fail!\nVerification error\nTry again");
+                                        }
+                                        catch { return; }
+                                    }
                                 }
                                 else
                                 {
                                     try
                                     {
-                                        Invoke(ShowFinish, "Burn. Fail!\nVerification error\nTry again");
+                                        Invoke(ShowFinish, "Burn. Fail!\nSomething went wrong\nTry again");
                                     }
                                     catch { return; }
                                 }
